@@ -88,16 +88,17 @@ button{
   overflow: hidden;
   padding: 20px 0;
   border-bottom: 1px solid #eee;
-
+}
+.task-item__wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.task-item > * {
+.task-item__wrapper > * {
   vertical-align: middle;
 }
 
-.task-item > input[type="checkbox"] {
+.task-checkbox {
   margin: 0 10px;
 }
 
@@ -122,7 +123,7 @@ button{
 .task-input:focus {
   color: #333;
 }
-.task-item > .task-input {
+.task-item__wrapper > .task-input {
   width: 226px;
 }
 
@@ -133,15 +134,15 @@ button{
 }
 
 /* Edit Task */
-.task-item .task-input {
+.task-item__wrapper .task-input {
   display: none;
 }
 
-.task-item.editMode .task-input {
+.task-item__wrapper.editMode .task-input {
   display: inline-block;
   width: 224px;
 }
 
-.task-item.editMode .task-name {
+.task-item__wrapper.editMode .task-name {
   display: none;
 }

@@ -10,15 +10,15 @@
 
 var taskInput=document.getElementById("new-task");//Add a new task.
 var addButton=document.getElementsByTagName("button")[0];//first button
-var incompleteTaskHolder=document.getElementById("incompleteTasks");//ul of #incompleteTasks
-var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
+const incompleteTaskHolder = document.querySelector("#incompleteTasks"),//ul of #incompleteTasks
+      completedTasksHolder = document.querySelector("#completed-tasks");//completed-tasks
 
 
 //New task list item
 var createNewTaskElement=function(taskString){
 
-    var listItem=document.createElement("li");
-
+    const listItem = document.createElement("li");
+    const taskItemWrapper = document.createElement("article");
     //input (checkbox)
     var checkBox=document.createElement("input");//checkbx
     //label
@@ -33,10 +33,10 @@ var createNewTaskElement=function(taskString){
     var deleteButtonImg=document.createElement("img");//delete button image
 
     label.innerText=taskString;
-    label.className='task';
 
     //Each elements, needs appending
     listItem.classList.add('task-item');
+    taskItemWrapper.classList.add('task-item__wrapper');
 
     checkBox.type="checkbox";
     checkBox.classList.add('task-checkbox');
@@ -50,15 +50,16 @@ var createNewTaskElement=function(taskString){
     deleteButton.className="btn delete";
     deleteButtonImg.src='./remove.svg';
     deleteButtonImg.classList.add('delete-img');
-    deleteButton.appendChild(deleteButtonImg);
+    deleteButton.append(deleteButtonImg);
 
 
     //and appending.
-    listItem.appendChild(checkBox);
-    listItem.appendChild(label);
-    listItem.appendChild(editInput);
-    listItem.appendChild(editButton);
-    listItem.appendChild(deleteButton);
+    taskItemWrapper.append(checkBox);
+    taskItemWrapper.append(label);
+    taskItemWrapper.append(editInput);
+    taskItemWrapper.append(editButton);
+    taskItemWrapper.append(deleteButton);
+    listItem.append(taskItemWrapper);
     return listItem;
 }
 
@@ -112,33 +113,36 @@ var editTask=function(){
 var deleteTask=function(){
     console.log("Delete Task...");
 
-    var listItem=this.parentNode;
-    var ul=listItem.parentNode;
+    const itemWrapper = this.parentElement;
+    const taskItem = itemWrapper.parentElement;
+    console.log(taskItem);
     //Remove the parent list item from the ul.
-    ul.removeChild(listItem);
+    taskItem.remove();
 
 }
 
 
 //Mark task completed
-var taskCompleted=function(){
+const taskCompleted = function() {
     console.log("Complete Task...");
 
     //Append the task list item to the #completed-tasks
-    var listItem=this.parentNode;
-    completedTasksHolder.appendChild(listItem);
+    const itemWrapper = this.parentElement;
+    const listItem = itemWrapper.parentElement;
+    completedTasksHolder.append(listItem);
     bindTaskEvents(listItem, taskIncomplete);
 
 }
 
 
-var taskIncomplete=function(){
+const taskIncomplete = function() {
     console.log("Incomplete Task...");
 //Mark task as incomplete.
     //When the checkbox is unchecked
-    //Append the task list item to the #incompleteTasks.
-    var listItem=this.parentNode;
-    incompleteTaskHolder.appendChild(listItem);
+    //Append the task list item to the #incompleteTasks.    
+    const itemWrapper = this.parentElement;
+    const listItem = itemWrapper.parentElement;
+    incompleteTaskHolder.append(listItem);
     bindTaskEvents(listItem,taskCompleted);
 }
 
