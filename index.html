@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+  <head>    
+    <meta charset="UTF-8">
     <title>Todo App</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="style.css" media="screen">
   </head>
   <body>
 
     <section class="first-screen">
-      <img class="first-screen__img" src="./eisenhower-matrix.jpg">
+      <img class="first-screen__img" alt="the Eisenhower matrix" src="./eisenhower-matrix.jpg">
       <a class="first-screen__link" href="https://goal-life.com/page/method/matrix-eisenhower">
           Want more details?</a>
     </section>
@@ -19,7 +20,7 @@
       <h3 class="heading">Add Item</h3>
       <div class="new-task-wrapper">
         <input class="task-input" id="new-task" type="text">
-        <button class="btn">Add</button>
+        <button class="btn" id="addBtn">Add</button>
       </div>
 
       <h3 class="heading">Todo</h3>
@@ -27,22 +28,22 @@
         <li class="task-item">
           <article class="task-item__wrapper">
             <input class="task-checkbox" type="checkbox">
-            <label class="task-name">Pay Bills</label>
+            <h4 class="task-name">Pay Bills</h4>
             <input class="task-input" type="text">
             <button class="btn edit">Edit</button>
             <button class="btn delete">
-              <img class="delete-img" src="./remove.svg">
+              <img class="delete-img" alt="delete img" src="./remove.svg">
             </button>
           </article>          
         </li>        
         <li class="task-item">          
           <article class="task-item__wrapper editMode">
             <input class="task-checkbox" type="checkbox">
-            <label class="task-name">Go Shopping</label>
+            <h4 class="task-name">Go Shopping</h4>
             <input class="task-input" type="text" value="Go Shopping">
             <button class="btn edit">Save</button>
             <button class="btn delete">
-              <img class="delete-img" src="./remove.svg">
+              <img class="delete-img" alt="delete img" src="./remove.svg">
             </button>
           </article>          
         </li>
@@ -53,11 +54,11 @@
         <li class="task-item">         
           <article class="task-item__wrapper">
             <input class="task-checkbox" type="checkbox" checked>
-            <label class="task-name">See the Doctor</label>
+            <h4 class="task-name">See the Doctor</h4>
             <input class="task-input" type="text">
             <button class="btn edit">Edit</button>
             <button class="btn delete">
-              <img class="delete-img" src="./remove.svg">
+              <img alt="delete img" class="delete-img" src="./remove.svg">
             </button>
           </article>          
         </li>

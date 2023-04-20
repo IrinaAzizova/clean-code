@@ -107,6 +107,8 @@ button{
   box-sizing: border-box;
   font-size: 18px;
   width: 226px;
+  margin: 0;
+  font-weight: 400;
 }
 .task-input {
   margin: 0;
