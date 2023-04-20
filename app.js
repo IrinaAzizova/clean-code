@@ -58,37 +58,35 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-    var addTask=function(){
+    const addTask = function() {
         console.log("Add Task...");
         //Create a new list item with the text from the #new-task:
         if (!taskInput.value) return;
-        var listItem=createNewTaskElement(taskInput.value);
+        const listItem = createNewTaskElement(taskInput.value);
 
         //Append listItem to incompleteTaskHolder
-        incompleteTaskHolder.appendChild(listItem);
+        incompleteTaskHolder.append(listItem);
         bindTaskEvents(listItem, taskCompleted);
 
         taskInput.value="";
-
     }
 
     //Edit an existing task.
 
-    var editTask=function(){
+    const editTask = function() {
         console.log("Edit Task...");
         console.log("Change 'edit' to 'save'");
 
+        const listItem = this.parentNode,
+              editInput = listItem.querySelector('.task-input'),
+              label = listItem.querySelector(".task-item__name"),
+              editBtn = listItem.querySelector(".btn-edit"),
+              containsClass = listItem.classList.contains("task-item__wrapper_edit");
 
-        var listItem = this.parentNode;
-
-        var editInput=listItem.querySelector('input[type=text]');
-        const label = listItem.querySelector(".task-item__name");
-        var editBtn=listItem.querySelector(".btn-edit");
-        var containsClass=listItem.classList.contains("editMode");
-        //If class of the parent is .editmode
+        //If class of the parent is .task-item__wrapper_edit
         if(containsClass){
-
-            //switch to .editmode
+            console.log(containsClass);
+            //switch to .task-item__wrapper_edit
             //label becomes the inputs value.
             label.textContent = editInput.value;
             editBtn.textContent = "Edit";
@@ -97,21 +95,20 @@ window.addEventListener("DOMContentLoaded", () => {
             editBtn.textContent = "Save";
         }
 
-        //toggle .editmode on the parent.
-        listItem.classList.toggle("editMode");
+        //toggle .task-item__wrapper_edit on the parent.
+        listItem.classList.toggle("task-item__wrapper_edit");
     };
 
 
     //Delete task.
-    var deleteTask=function(){
+    const deleteTask = function(){
         console.log("Delete Task...");
 
-        const itemWrapper = this.parentElement;
-        const taskItem = itemWrapper.parentElement;
+        const itemWrapper = this.parentElement,
+              taskItem = itemWrapper.parentElement;
         console.log(taskItem);
         //Remove the parent list item from the ul.
         taskItem.remove();
-
     }
 
 
@@ -120,28 +117,27 @@ window.addEventListener("DOMContentLoaded", () => {
         console.log("Complete Task...");
 
         //Append the task list item to the #completed-tasks
-        const itemWrapper = this.parentElement;
-        const listItem = itemWrapper.parentElement;
+        const itemWrapper = this.parentElement,
+              listItem = itemWrapper.parentElement;
         completedTasksHolder.append(listItem);
         bindTaskEvents(listItem, taskIncomplete);
-
     }
 
 
     const taskIncomplete = function() {
         console.log("Incomplete Task...");
-    //Mark task as incomplete.
+        //Mark task as incomplete.
         //When the checkbox is unchecked
         //Append the task list item to the #incompleteTasks.    
-        const itemWrapper = this.parentElement;
-        const listItem = itemWrapper.parentElement;
+        const itemWrapper = this.parentElement,
+              listItem = itemWrapper.parentElement;
         incompleteTaskHolder.append(listItem);
         bindTaskEvents(listItem,taskCompleted);
     }
 
 
 
-    var ajaxRequest=function(){
+    const ajaxRequest = function() {
         console.log("AJAX Request");
     }
 
@@ -150,29 +146,27 @@ window.addEventListener("DOMContentLoaded", () => {
 
     //Set the click handler to the addTask function.
     addButton.addEventListener("click",addTask);
-    addButton.addEventListener("click",ajaxRequest);
+    /* addButton.addEventListener("click",ajaxRequest); */
 
 
-    var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
+    const bindTaskEvents = function(taskListItem,checkBoxEventHandler) {
         console.log("bind list item events");
-    //select ListItems children
-        var checkBox=taskListItem.querySelector("input[type=checkbox]");
-        const editButton=taskListItem.querySelector(".btn-edit"),
+        //select ListItems children
+        const checkBox = taskListItem.querySelector(".task-item__checkbox"),
+              editButton=taskListItem.querySelector(".btn-edit"),
               deleteButton=taskListItem.querySelector(".btn-delete");
 
-
         //Bind editTask to edit button.
-        editButton.onclick=editTask;
+        editButton.addEventListener("click", editTask);
         //Bind deleteTask to delete button.
-        deleteButton.onclick=deleteTask;
+        deleteButton.addEventListener("click", deleteTask);
         //Bind taskCompleted to checkBoxEventHandler.
-        checkBox.onchange=checkBoxEventHandler;
+        checkBox.addEventListener('change', checkBoxEventHandler);
     }
 
     //cycle over incompleteTaskHolder ul list items
     //for each list item
-    for (var i=0; i<incompleteTaskHolder.children.length;i++){
-
+    for (let i=0; i < incompleteTaskHolder.children.length; i++){
         //bind events to list items chldren(tasksCompleted)
         bindTaskEvents(incompleteTaskHolder.children[i],taskCompleted);
     }
@@ -181,11 +175,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     //cycle over completedTasksHolder ul list items
-    for (var i=0; i<completedTasksHolder.children.length;i++){
+    for (let i=0; i < completedTasksHolder.children.length; i++){
         //bind events to list items chldren(tasksIncompleted)
         bindTaskEvents(completedTasksHolder.children[i],taskIncomplete);
     }
-
 });
 
 

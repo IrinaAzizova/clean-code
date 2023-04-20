@@ -140,11 +140,11 @@ button{
   display: none;
 }
 
-.task-item__wrapper.editMode .task-input {
+.task-item__wrapper_edit .task-input {
   display: inline-block;
   width: 224px;
 }
 
-.task-item__wrapper.editMode .task-item__name {
+.task-item__wrapper_edit .task-item__name {
   display: none;
 }
